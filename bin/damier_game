@@ -1,0 +1,5 @@
+#!/usr/bin/env python
+
+import damier_game.command_line as cl
+
+cl.main()

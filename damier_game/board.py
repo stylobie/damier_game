@@ -3,6 +3,7 @@ from .position_damier import PositionsDamier
 from .damier import Damier
 from .mouvement import Mouvement
 from .damier_exception import DamierException
+from .mouvement_unitaire import MouvementUnitaire
 
 
 class Board(Dessinateur):
@@ -70,7 +71,8 @@ class Board(Dessinateur):
                 return
             if p.couleur != self._damier.prochainMouvement:
                 return
-            mouvementsUnitaires = p.analyse(True)
+            mouvementsUnitaires = self._damier.analyse()
+            mouvementsUnitaires = MouvementUnitaire.filter(mouvementsUnitaires, position)
             if len(mouvementsUnitaires) == 0:
                 return
             self._mouvementsUnitaires = mouvementsUnitaires

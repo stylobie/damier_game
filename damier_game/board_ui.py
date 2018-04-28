@@ -165,7 +165,7 @@ class BoardUI(tk.Frame):
         self.canvas.create_image(x1, y1, image=photo, tags="piece", anchor="c")
 
     def dessinerMessage(self, msg):
-        pass
+        self.label_status.config(text=msg)
 
     def click(self, event):
         # Figure out which square we've clicked

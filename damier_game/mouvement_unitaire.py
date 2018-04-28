@@ -12,12 +12,21 @@ class MouvementUnitaire:
     def removeNonMaximal(mouvements):
         maxCaptures = MouvementUnitaire.getMaxCaptures(mouvements)
         # on supprime les mouvements dont la prise n'est pas maximale
-        for i in range(len(mouvements) - 1, 0, - 1):
+        for i in range(len(mouvements) - 1, -1, - 1):
             temp = mouvements[i]
             tempMaxCaptures = temp.getPriseMax()
             if tempMaxCaptures < maxCaptures:
                 mouvements.remove(temp)
         return maxCaptures
+
+    @staticmethod
+    def filter(mouvements, startPosition):
+        result = []
+        if not(mouvements is None):
+            for mu in mouvements:
+                if mu.positionDepart == startPosition:
+                    result.append(mu)
+        return result
 
     @staticmethod
     def getVariantes(mouvementsPossibles):

@@ -22,7 +22,7 @@ class Damier:
     @prochainMouvement.setter
     def prochainMouvement(self, value):
         self._prochainMouvement = value
-
+        self._dessinateur.dessinerMessage(value)
     @property
     def pieces(self):
         """
@@ -195,7 +195,7 @@ class Damier:
         pieces = self.getPieces(self.prochainMouvement)
         for piece in pieces:
             mouvementsPiece = piece.analyse(True)
-            mouvements + mouvementsPiece
+            mouvements = mouvements + mouvementsPiece
 
         # on enlève les mouvements qui n'ont pas de prise maximale
         MouvementUnitaire.removeNonMaximal(mouvements)

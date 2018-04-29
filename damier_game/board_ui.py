@@ -187,7 +187,7 @@ def display():
     gui = BoardUI(root)
     gui.pack(side="top", fill="both", expand="true",
              padx=gui.pad, pady=gui.pad)
-    gui.board._damier = Damier(gui.board)
+    gui.board.damier = Damier(gui.board)
     # root.resizable(0,0)
     root.mainloop()
 

@@ -22,8 +22,15 @@ class Board(Dessinateur):
     def start(self, value):
         self._trace = []
         self._start = value
+        self._hints = []
         if value is None:
-            self._hints = []
+            if not self.damier is None:
+                mouvementsUnitaires = self.damier.analyse()
+                for mu in mouvementsUnitaires:
+                    self._hints.append(mu.positionDepart)
+            self._trace = []
+            self._mouvementsUnitaires = []
+
         else:
             mouvementsUnitaires = self._mouvementsUnitaires
             if len(mouvementsUnitaires) == 0:
@@ -42,16 +49,25 @@ class Board(Dessinateur):
     @property
     def trace(self):
         return self._trace
+    @property
+    def damier(self):
+        return self._damier
+    @damier.setter
+    def damier(self, value):
+        self._damier = value
+        self.initialiseMvt()
+
+    def initialiseMvt(self):
+        self.start = None
+        if not self._damier is None:
+            self._boardUI.drawBoard(False)
 
     def __init__(self, boardUI):
         self._boardUI = boardUI
         self._boardSize = PositionsDamier.lignes
         self._pieces = None
-        self._start = None
-        self._hints = []
-        self._trace = []
         self._damier = None
-        self._mouvementsUnitaires = []
+        self.initialiseMvt()
 
     def dessinerMessage(self, message):
         self._boardUI.dessinerMessage(message)
@@ -105,6 +121,7 @@ class Board(Dessinateur):
         try:
             mvt.valider()
             mvt.execute()
+            self.initialiseMvt()
         except DamierException as e:
             self._boardUI.dessinerMessage(str(e))
         

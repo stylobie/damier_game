@@ -19,8 +19,8 @@ class Direction:
     haut = [HAUT_GAUCHE, HAUT_DROITE]
     bas = [BAS_GAUCHE, BAS_DROITE]
     avancement = {
-        Couleur.NOIR: [BAS_DROITE, BAS_GAUCHE],
-        Couleur.BLANC: [HAUT_DROITE, HAUT_GAUCHE]
+        Couleur.NOIR: bas,
+        Couleur.BLANC: haut
     }
 
 

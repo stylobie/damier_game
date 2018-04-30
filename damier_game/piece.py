@@ -64,7 +64,7 @@ class Piece():
                le damier ou on va positionner la pièce
         @param position
                la position de destination sur le "damierDestination"
-        @return "null" si la pièce a été positionnée ou le motif pour lequel la pièce
+        @return "None" si la pièce a été positionnée ou le motif pour lequel la pièce
             ne peut pas être positionnée
         """
         if damierDestination is None:
@@ -88,7 +88,7 @@ class Piece():
         """
         Retire une pièce depuis un damier
         """
-        if not self.damier is None:
+        if not self._damier is None:
             self._damier.removePiece(self)
             self._damier = None
             self._position = -1

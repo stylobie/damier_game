@@ -108,7 +108,7 @@ class Damier:
 
         @param position
         la position sur le damier
-        @return null si pas de pièce trouvée sur la position donnée ou la pièce
+        @return None si pas de pièce trouvée sur la position donnée ou la pièce
         retrouvée
         """
         if PositionsDamier.estPositionInvalide(position):

@@ -18,7 +18,8 @@ class BoardUI(tk.Frame):
 
     @staticmethod
     def getImgDir():
-        return os.path.join(os.path.dirname(__file__), "img")
+        fileName = __file__
+        return os.path.join(os.path.dirname(fileName), "img")
 
     @property
     def boardSize(self):
@@ -87,8 +88,9 @@ class BoardUI(tk.Frame):
                 y2 = y1 + self.squareSize
                 self.canvas.create_rectangle(
                     x1, y1, x2, y2, outline="black", fill=color, tags="square")
-                text = str(PositionsDamier.getPositionManoury(row, col))
-                if(row + col) % 2 != 0:
+                position = PositionsDamier.getPositionManoury(row, col)
+                if position > 0:
+                    text = str(position)
                     self.canvas.create_text(
                         x2 - 6, y2 - 6, text=text, font=self.font, anchor="c", tag="text")
 
@@ -126,7 +128,7 @@ class BoardUI(tk.Frame):
             (ligne, colonne) = PositionsDamier.getCoords(hint)
             self.drawSelection(ligne, colonne, "chartreuse", "hint")
 
-    def drawBoard(self, init = True):
+    def drawBoard(self, init=True):
 
         if init:
             self.drawSquares()
@@ -160,8 +162,7 @@ class BoardUI(tk.Frame):
         photo = self.photos[p.img]
         # photo = self.photos["DAME_" + p.couleur]
         x1 = self.pad + column * self.squareSize + self.squareSize // 2
-        y1 = self.pad + (ligne) * \
-            self.squareSize + self.squareSize // 2
+        y1 = self.pad + ligne * self.squareSize + self.squareSize // 2
         self.canvas.create_image(x1, y1, image=photo, tags="piece", anchor="c")
 
     def dessinerMessage(self, msg):

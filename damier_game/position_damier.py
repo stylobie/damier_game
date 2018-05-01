@@ -55,12 +55,16 @@ class PositionsDamier:
                 la position voisine ou -1 si on est en bordure du damier
         """
         # si le numéro de ligne est pair
-        result = {
-            Direction.HAUT_GAUCHE: position - PositionsDamier.colonnes,
-            Direction.HAUT_DROITE: position - PositionsDamier.colonnes + 1,
-            Direction.BAS_GAUCHE: position + PositionsDamier.colonnes,
-            Direction.BAS_DROITE: position + PositionsDamier.colonnes + 1,
-        }[direction]
+        if direction == Direction.HAUT_GAUCHE:
+            result = position - PositionsDamier.colonnes
+        elif direction == Direction.HAUT_DROITE:
+            result = position - PositionsDamier.colonnes + 1
+        elif direction == Direction.BAS_GAUCHE:
+            result = position + PositionsDamier.colonnes
+        elif direction == Direction.BAS_DROITE:
+            result = position + PositionsDamier.colonnes + 1
+        else:
+            raise Exception("Cas impossible")
 
         # si le numéro de ligne est impair, une correction est necessaire
         numeroLigne = PositionsDamier.getNumeroLigne(position)
@@ -151,16 +155,17 @@ class PositionsDamier:
         result = (positionAbsolue % PositionsDamier.colonnes) * \
             2 + (PositionsDamier.getNumeroLigne(position) + 1) % 2
         return result
+
     @staticmethod
     def getPositionManoury(ligne, colonne):
         if(ligne + colonne) % 2 == 0:
             return -1
         return ligne * PositionsDamier.colonnes + colonne // 2 + 1
-    
+
     @staticmethod
     def getCoords(position):
         ligne = PositionsDamier.getNumeroLigne(position)
-        if ligne < 0 :
+        if ligne < 0:
             return None
         colonne = PositionsDamier.getNumeroColonne(position)
         return (ligne, colonne)

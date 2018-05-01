@@ -2,6 +2,7 @@ from .constants import Couleur, Direction
 from .position_damier import PositionsDamier
 from .mouvement_unitaire import MouvementUnitaire
 from .outils import Outils
+from .damier_exception import DamierException
 
 
 class Piece():
@@ -60,22 +61,20 @@ class Piece():
         """
         Positionne une pièce sur un damier.
 
-        @param damierDestination
+        @param damierDestination de type Damier
                le damier ou on va positionner la pièce
         @param position
                la position de destination sur le "damierDestination"
-        @return "None" si la pièce a été positionnée ou le motif pour lequel la pièce
-            ne peut pas être positionnée
         """
         if damierDestination is None:
-            return "Le damier n'est pas défini"
+            raise DamierException("Le damier n'est pas défini")
         # si la pièce est déjà placée sur un damier
         if not self.damier is None:
-            return "La piece est déjà placée à la position {:d}".format(self.position)
+            raise DamierException("La piece est déjà placée à la position {:d}".format(self.position))
 
         # si la position est invalide ou occupée
         if (PositionsDamier.estPositionInvalide(position) or damierDestination.estPositionOccupee(position)):
-            return "La piece ne peut pas être placée à la position {:d}".format(position)
+            raise DamierException("La piece ne peut pas être placée à la position {:d}".format(position))
 
         # si la position est libre, positionner la pièce sur le damier
         self._damier = damierDestination

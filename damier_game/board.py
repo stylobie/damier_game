@@ -24,6 +24,10 @@ class Board(Dessinateur):
         self._start = value
         self._hints = []
         if value is None:
+            """
+            Nous allons chercher ici les points de depart possibles
+            Pour réaliser cela on va retrouver l'arbre des mouvements possibles et on va prendre les points de départ
+            """
             if not self.damier is None:
                 mouvementsUnitaires = self.damier.analyse()
                 for mu in mouvementsUnitaires:
@@ -32,6 +36,8 @@ class Board(Dessinateur):
             self._mouvementsUnitaires = []
 
         else:
+            """Nous allons chercher ici les positions de destination pour la piece sélectionnée"""
+            
             mouvementsUnitaires = self._mouvementsUnitaires
             if len(mouvementsUnitaires) == 0:
                 self.start = None

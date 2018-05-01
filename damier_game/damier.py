@@ -20,9 +20,15 @@ class Damier:
         return self._prochainMouvement
 
     @prochainMouvement.setter
-    def prochainMouvement(self, value):
-        self._prochainMouvement = value
-        self._dessinateur.dessinerMessage(value)
+    def prochainMouvement(self, couleur):
+        self._prochainMouvement = couleur
+        msgFmt = "C'est au tour des {}"
+        if couleur == Couleur.BLANC:
+            msg = "blancs"
+        else :
+            msg = "noirs"
+        
+        self._dessinateur.dessinerMessage(msgFmt.format(msg))
 
     @property
     def pieces(self):

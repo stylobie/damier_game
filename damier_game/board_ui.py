@@ -78,6 +78,7 @@ class BoardUI(tk.Frame):
                 y2 = y1 + self.squareSize
                 self.canvas.create_rectangle(
                     x1, y1, x2, y2, outline="black", fill=color, tags="square")
+                
                 position = PositionsDamier.getPositionManoury(row, col)
                 if position > 0:
                     text = str(position)

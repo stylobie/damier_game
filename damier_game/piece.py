@@ -104,7 +104,12 @@ class Piece():
     def analyse(self, garderPriseMaximale, piecesCapturees=[]):
         # pour un mouvement unitaire initial la liste des pièces capturées est
         # vide
-        estMouvementInitial = len(piecesCapturees) == 0
+        if len(piecesCapturees) == 0:
+            estMouvementInitial = True
+        else:
+            estMouvementInitial = False
+
+        # estMouvementInitial = len(piecesCapturees) == 0
 
         # on mémorise la position de départ
         positionDepart = self.position

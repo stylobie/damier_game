@@ -22,13 +22,21 @@ class Damier:
     @prochainMouvement.setter
     def prochainMouvement(self, couleur):
         self._prochainMouvement = couleur
-        msgFmt = "C'est au tour des {}"
-        if couleur == Couleur.BLANC:
-            msg = "blancs"
-        else :
-            msg = "noirs"
+        if self.getEstTermine() :
+            msgFmt = "Les {} ont gagné"
+            if couleur == Couleur.BLANC:
+                msg = "noirs"
+            else:
+                msg = "blancs"
+        else :   
+            msgFmt = "C'est au tour des {}"
+            if couleur == Couleur.BLANC:
+                msg = "blancs"
+            else:
+                msg = "noirs"
         
-        self._dessinateur.dessinerMessage(msgFmt.format(msg))
+        message = msgFmt.format(msg)
+        self._dessinateur.dessinerMessage(message)
 
     @property
     def pieces(self):

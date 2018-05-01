@@ -40,12 +40,9 @@ class Mouvement:
         p = self.piece
         for i in range(len(self.mouvementsUnitaires)):
             mu = self.mouvementsUnitaires[i]
-            if i == len(self.mouvementsUnitaires) - 1:
-                p.deplacer(mu.positionDestination)
-            else:
-                p.simuler(mu.positionDestination)
-
+            p.deplacer(mu.positionDestination)
             self.damier.dessiner(None)
+
         for mu in self.mouvementsUnitaires:
             if mu.estCapture:
                 self.damier.retirer(mu.positionCapturee)

@@ -37,12 +37,6 @@ class BoardUI(tk.Frame):
         self.parent = parent
         tk.Frame.__init__(self, parent)
 
-        self.canvas = tk.Canvas(
-            self, width=self.boardSize + 4, height=self.boardSize + 4, background="grey")
-        self.canvas.pack(side="top", fill="both", anchor="c", expand=True)
-
-        tk.Frame.__init__(self, parent)
-        self.parent = parent
         self.canvas = tk.Canvas(self, width=self.boardSize + self.pad,
                                 height=self.boardSize + self.pad, background="grey")
         self.canvas.pack(side="top", fill="both", anchor="c", expand=True)
@@ -58,10 +52,6 @@ class BoardUI(tk.Frame):
         self.button_quit = tk.Button(self.statusbar, text="New", fg="black")
 
         self.button_quit.pack(side=tk.LEFT, in_=self.statusbar)
-
-        self.button_save = tk.Button(self.statusbar, text="Save", fg="black")
-
-        self.button_save.pack(side=tk.LEFT, in_=self.statusbar)
 
         self.label_status = tk.Label(
             self.statusbar, text="   White's turn  ", fg="black")

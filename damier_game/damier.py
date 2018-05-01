@@ -23,6 +23,7 @@ class Damier:
     def prochainMouvement(self, value):
         self._prochainMouvement = value
         self._dessinateur.dessinerMessage(value)
+
     @property
     def pieces(self):
         """
@@ -31,7 +32,7 @@ class Damier:
         """
         return self._pieces
 
-    def __init__(self, dessinateur, tableVide=False, prochainMouvement=Couleur.BLANC):
+    def __init__(self, dessinateur, tableVide = False, prochainMouvement = Couleur.BLANC):
         self._dessinateur = dessinateur
         self._prochainMouvement = prochainMouvement
         self._pieces = []
@@ -123,6 +124,7 @@ class Damier:
 
     def addPiece(self, piece):
         self._pieces.append(piece)
+
     def removePiece(self, piece):
         self._pieces.remove(piece)
 
@@ -222,43 +224,6 @@ class Damier:
             self._dessinateur.dessinerMessage(message)
         # dessine les pièces sur le damier
         self._dessinateur.dessiner(self.pieces)
-
-    # def archiverJeu(self, nom) :
-    #     # la liste de pièces, données dans l'ordre: pions noirs, pions blancs, dames
-    #     # noires, dames blanches
-    #     int[][] pieces = new int[4][]
-
-    #     ArrayList<Integer> pionsNoirs = new ArrayList<Integer>()
-    #     ArrayList<Integer> pionsBlancs = new ArrayList<Integer>()
-    #     ArrayList<Integer> damesNoires = new ArrayList<Integer>()
-    #     ArrayList<Integer> damesBlanches = new ArrayList<Integer>()
-    #     for (int i = 0; i < self.pieces.size(); i++)
-    #         Piece p = self.pieces.get(i)
-    #         ArrayList<Integer> liste
-    #         if (p.getTypePiece().equals(Pion.typePion))
-    #             liste = p.getCouleur() == Couleur.NOIR ? pionsNoirs : pionsBlancs
-    #         else
-    #             liste = p.getCouleur() == Couleur.NOIR ? damesNoires : damesBlanches
-    #         liste.add(p.getPosition())
-
-    #     pieces[0] = new int[pionsNoirs.size()]
-    #     for (int i = 0; i < pionsNoirs.size(); i++)
-    #         pieces[0][i] = pionsNoirs.get(i)
-
-    #     pieces[1] = new int[pionsBlancs.size()]
-    #     for (int i = 0; i < pionsBlancs.size(); i++)
-    #         pieces[1][i] = pionsBlancs.get(i)
-
-    #     pieces[2] = new int[damesNoires.size()]
-    #     for (int i = 0; i < damesNoires.size(); i++)
-    #         pieces[2][i] = damesNoires.get(i)
-
-    #     pieces[3] = new int[damesBlanches.size()]
-    #     for (int i = 0; i < damesBlanches.size(); i++)
-    #         pieces[3][i] = damesBlanches.get(i)
-
-    #     ArchiveJeu archive = new ArchiveJeu(nom, pieces, self.prochainMouvement)
-    #     return archive
 
     def creerPion(self, position, couleur):
         """

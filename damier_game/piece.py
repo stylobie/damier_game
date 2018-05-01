@@ -146,6 +146,3 @@ class Piece():
 
     def getDestinationsPossiblesAvecUneCapture(self, piecesCapturees):
         pass
-
-    def simuler(self, destination):
-        self._position = destination

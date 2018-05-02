@@ -1,4 +1,4 @@
-from .dessinateur import Dessinateur
+from .constants import Couleur
 from .position_damier import PositionsDamier
 from .damier import Damier
 from .mouvement import Mouvement
@@ -6,7 +6,7 @@ from .damier_exception import DamierException
 from .mouvement_unitaire import MouvementUnitaire
 
 
-class Board(Dessinateur):
+class Board:
     @property
     def boardSize(self):
         return self._boardSize
@@ -61,6 +61,7 @@ class Board(Dessinateur):
     @damier.setter
     def damier(self, value):
         self._damier = value
+        self.dessiner(self.damier.pieces)
         self.initialiseMvt()
 
     def initialiseMvt(self):
@@ -127,6 +128,22 @@ class Board(Dessinateur):
         try:
             mvt.valider()
             mvt.execute()
+            if self.damier.getEstTermine() :
+                msgFmt = "Les {} ont gagné"
+                if self.damier.prochainMouvement == Couleur.BLANC:
+                    msg = "noirs"
+                else:
+                    msg = "blancs"
+            else :   
+                msgFmt = "C'est au tour des {}"
+            if self.damier.prochainMouvement == Couleur.BLANC:
+                msg = "blancs"
+            else:
+                msg = "noirs"
+            message = msgFmt.format(msg)
+            self.dessinerMessage(message)
+            self.dessiner(self.damier.pieces)
+
             self.initialiseMvt()
         except DamierException as e:
             self._boardUI.dessinerMessage(str(e))

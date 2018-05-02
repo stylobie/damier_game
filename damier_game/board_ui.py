@@ -6,7 +6,6 @@ from PIL import Image, ImageTk
 from .constants import Couleur, TypePiece
 from .board import Board
 from .constants import Couleur, Direction
-from .damier import Damier
 from .position_damier import PositionsDamier
 
 
@@ -165,24 +164,3 @@ class BoardUI(tk.Frame):
         colonne = (event.x-self.pad) // col_size
         ligne = (event.y - self.pad) // row_size
         self.board.click(ligne, colonne)
-
-    # def reset(self):
-    #    pass
-    # def save(self):
-    #    pass
-
-
-def display():
-    root = tk.Tk()
-    root.title("Dames")
-
-    gui = BoardUI(root)
-    gui.pack(side="top", fill="both", expand="true",
-             padx=gui.pad, pady=gui.pad)
-    gui.board.damier = Damier(gui.board)
-    # root.resizable(0,0)
-    root.mainloop()
-
-
-if __name__ == "__main__":
-    display()

@@ -41,7 +41,6 @@ class Mouvement:
         for i in range(len(self.mouvementsUnitaires)):
             mu = self.mouvementsUnitaires[i]
             p.deplacer(mu.positionDestination)
-            self.damier.dessiner(None)
 
         for mu in self.mouvementsUnitaires:
             if mu.estCapture:

@@ -22,22 +22,7 @@ class Damier:
     @prochainMouvement.setter
     def prochainMouvement(self, couleur):
         self._prochainMouvement = couleur
-        if self.getEstTermine() :
-            msgFmt = "Les {} ont gagné"
-            if couleur == Couleur.BLANC:
-                msg = "noirs"
-            else:
-                msg = "blancs"
-        else :   
-            msgFmt = "C'est au tour des {}"
-            if couleur == Couleur.BLANC:
-                msg = "blancs"
-            else:
-                msg = "noirs"
         
-        message = msgFmt.format(msg)
-        self._dessinateur.dessinerMessage(message)
-
     @property
     def pieces(self):
         """
@@ -46,8 +31,7 @@ class Damier:
         """
         return self._pieces
 
-    def __init__(self, dessinateur, tableVide = False, prochainMouvement = Couleur.BLANC):
-        self._dessinateur = dessinateur
+    def __init__(self, tableVide = False, prochainMouvement = Couleur.BLANC):
         self._prochainMouvement = prochainMouvement
         self._pieces = []
         if not tableVide:
@@ -68,7 +52,6 @@ class Damier:
         # erreur
         self.creerPionsParCouleur(
             positionsInitialesPionsNoirs, positionsInitialesPionsBlancs)
-        self.dessiner("nouveau jeu")
 
     def getEstTermine(self):
         """
@@ -228,17 +211,6 @@ class Damier:
         if not piece is None:
             self._pieces.remove(piece)
 
-    def dessiner(self, message):
-        """
-        Dessine le damier à l'aide du dessinateur précisé dans le constructeur
-        """
-        if self._dessinateur is None:
-            return
-        if message != "":
-            self._dessinateur.dessinerMessage(message)
-        # dessine les pièces sur le damier
-        self._dessinateur.dessiner(self.pieces)
-
     def creerPion(self, position, couleur):
         """
         Crée un pion
@@ -282,7 +254,6 @@ class Damier:
 
         self.creerPionsParCouleur(pionsNoirs, pionsBlancs)
         self.creerDamesParCouleur(damesNoires, damesBlanches)
-        self.dessiner("reprise jeu")
 
     def creerPionsParCouleur(self, positionsNoires, positionsBlanches):
         """

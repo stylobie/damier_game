@@ -48,9 +48,9 @@ class BoardUI(tk.Frame):
 
         self.statusbar = tk.Frame(self, height=64)
 
-        self.button_quit = tk.Button(self.statusbar, text="New", fg="black")
+        self.button_new = tk.Button(self.statusbar, text="Nouveau jeu", fg="black", command = self.nouveauJeuClick)
 
-        self.button_quit.pack(side=tk.LEFT, in_=self.statusbar)
+        self.button_new.pack(side=tk.LEFT, in_=self.statusbar)
 
         self.label_status = tk.Label(
             self.statusbar, text="   White's turn  ", fg="black")
@@ -164,3 +164,5 @@ class BoardUI(tk.Frame):
         colonne = (event.x-self.pad) // col_size
         ligne = (event.y - self.pad) // row_size
         self.board.click(ligne, colonne)
+    def nouveauJeuClick(self):
+        self.board.nouveauJeu()

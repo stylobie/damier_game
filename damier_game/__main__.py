@@ -9,7 +9,7 @@ def display():
     gui = BoardUI(root)
     gui.pack(side="top", fill="both", expand="true",
              padx=gui.pad, pady=gui.pad)
-    gui.board.damier = Damier()
+    gui.board.nouveauJeu()
     # root.resizable(0,0)
     root.mainloop()
 

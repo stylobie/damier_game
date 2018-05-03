@@ -18,6 +18,7 @@ class Board:
     @property
     def start(self):
         return self._start
+
     @start.setter
     def start(self, value):
         self._trace = []
@@ -37,7 +38,7 @@ class Board:
 
         else:
             """Nous allons chercher ici les positions de destination pour la piece sélectionnée"""
-            
+
             mouvementsUnitaires = self._mouvementsUnitaires
             if len(mouvementsUnitaires) == 0:
                 self.start = None
@@ -55,9 +56,11 @@ class Board:
     @property
     def trace(self):
         return self._trace
+
     @property
     def damier(self):
         return self._damier
+
     @damier.setter
     def damier(self, value):
         self._damier = value
@@ -66,7 +69,25 @@ class Board:
 
     def initialiseMvt(self):
         self.start = None
-        if not self._damier is None:
+        if not self.damier is None:
+            if self.damier.getEstTermine():
+                msgFmt = "Les {} ont gagné"
+                if self.damier.prochainMouvement == Couleur.BLANC:
+                    msg = "noirs"
+                else:
+                    msg = "blancs"
+            else :   
+                msgFmt = "C'est au tour des {}"
+            if self.damier.prochainMouvement == Couleur.BLANC:
+                msg = "blancs"
+            else:
+                msg = "noirs"
+            message = msgFmt.format(msg)
+            
+            self.dessinerMessage(message)
+
+            self.dessiner(self.damier.pieces)
+
             self._boardUI.drawBoard(False)
 
     def __init__(self, boardUI):
@@ -116,6 +137,8 @@ class Board:
                         self._hints = hints
         self._boardUI.drawBoard(False)
 
+    def nouveauJeu(self):
+        self.damier = Damier()
     def move(self):
         traceStr = []
         for p in self._trace:
@@ -128,23 +151,7 @@ class Board:
         try:
             mvt.valider()
             mvt.execute()
-            if self.damier.getEstTermine() :
-                msgFmt = "Les {} ont gagné"
-                if self.damier.prochainMouvement == Couleur.BLANC:
-                    msg = "noirs"
-                else:
-                    msg = "blancs"
-            else :   
-                msgFmt = "C'est au tour des {}"
-            if self.damier.prochainMouvement == Couleur.BLANC:
-                msg = "blancs"
-            else:
-                msg = "noirs"
-            message = msgFmt.format(msg)
-            self.dessinerMessage(message)
-            self.dessiner(self.damier.pieces)
-
             self.initialiseMvt()
         except DamierException as e:
-            self._boardUI.dessinerMessage(str(e))
+            self.dessinerMessage(str(e))
         

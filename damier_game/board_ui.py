@@ -1,6 +1,7 @@
 import os
 import tkinter as tk
 import tkinter.font as tkFont
+import tkinter.messagebox as tkMessageBox
 from PIL import Image, ImageTk
 
 from .constants import Couleur, TypePiece
@@ -48,7 +49,8 @@ class BoardUI(tk.Frame):
 
         self.statusbar = tk.Frame(self, height=64)
 
-        self.button_new = tk.Button(self.statusbar, text="Nouveau jeu", fg="black", command = self.nouveauJeuClick)
+        self.button_new = tk.Button(
+            self.statusbar, text="Nouveau jeu", fg="black", command=self.nouveauJeuClick)
 
         self.button_new.pack(side=tk.LEFT, in_=self.statusbar)
 
@@ -58,7 +60,7 @@ class BoardUI(tk.Frame):
         self.label_status.pack(side=tk.LEFT, expand=0, in_=self.statusbar)
 
         self.button_quit = tk.Button(
-            self.statusbar, text="Quit", fg="black", command=self.parent.destroy)
+            self.statusbar, text="Quitter", fg="black", command=self.quit)
 
         self.button_quit.pack(side=tk.RIGHT, in_=self.statusbar)
 
@@ -77,7 +79,7 @@ class BoardUI(tk.Frame):
                 y2 = y1 + self.squareSize
                 self.canvas.create_rectangle(
                     x1, y1, x2, y2, outline="black", fill=color, tags="square")
-                
+
                 position = PositionsDamier.getPositionManoury(row, col)
                 if position > 0:
                     text = str(position)
@@ -164,5 +166,17 @@ class BoardUI(tk.Frame):
         colonne = (event.x-self.pad) // col_size
         ligne = (event.y - self.pad) // row_size
         self.board.click(ligne, colonne)
+
     def nouveauJeuClick(self):
-        self.board.nouveauJeu()
+        if self.askAbandon():
+            self.board.nouveauJeu()
+
+    def quit(self):
+        if self.askAbandon():
+            self.parent.destroy()
+
+    def askAbandon(self) :
+        if tkMessageBox.askyesno('Question', 'Voulez-vous abandoner le jeu ?'):
+            return True
+        else:
+            return False

@@ -26,7 +26,7 @@ class Board:
         self._hints = []
         if value is None:
             """
-            Nous allons chercher ici les points de depart possibles
+            Nous allons chercher ici les points de départ possibles
             Pour réaliser cela on va retrouver l'arbre des mouvements possibles et on va prendre les points de départ
             """
             if not self.damier is None:
@@ -78,10 +78,10 @@ class Board:
                     msg = "blancs"
             else :   
                 msgFmt = "C'est au tour des {}"
-            if self.damier.prochainMouvement == Couleur.BLANC:
-                msg = "blancs"
-            else:
-                msg = "noirs"
+                if self.damier.prochainMouvement == Couleur.BLANC:
+                    msg = "blancs"
+                else:
+                    msg = "noirs"
             message = msgFmt.format(msg)
             
             self.dessinerMessage(message)

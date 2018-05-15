@@ -176,7 +176,7 @@ class Damier:
             # données, on trouve la pièce voisine à la dernière position libre. C'est cette
             # pièce voisine qui est la pièce la plus proche recherchée.
         else:
-            dernierePositionLibre = positionsLibres[-1]
+            dernierePositionLibre = positionsLibres 
             positionPremierePiece = PositionsDamier.getPositionVoisine(
                 dernierePositionLibre, direction)
         return self.getPiece(positionPremierePiece)
@@ -289,18 +289,11 @@ class Damier:
         liste des positions des dames blanches
         @return "null" ou le message d'erreur
         """
-        # TODO erreurs = new ArrayList<String>()
-        # String erreur =
+        
         self.creerDamesParPositionEtCouleur(positionsNoires, Couleur.NOIR)
-        # if (erreur != null)
-        #    erreurs.add(erreur)
-
-        # erreur =
+        
         self.creerDamesParPositionEtCouleur(positionsBlanches, Couleur.BLANC)
-        # if (erreur != null)
-        #     erreurs.add(erreur)
-
-        # return erreurs.size() > 0 ? String.join("\n", erreurs) : null
+       
 
     def creerDamesParPositionEtCouleur(self, positions, couleur):
         """
@@ -312,10 +305,6 @@ class Damier:
         couleur des dames
         @return "null" si la création est réussie ou le message d'erreur
         """
-        # TODO ArrayList<String> erreurs = new ArrayList<String>()
         for position in positions:
-            # String erreur =
             self.creerDame(position, couleur)
-            # if (erreur != null)
-            #     erreurs.add(erreur)
-            # return erreurs.size() > 0 ? String.join("\n", erreurs) : null
+          
